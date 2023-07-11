@@ -1,0 +1,36 @@
+class Solution {
+public:
+
+
+int largestSumAfterKNegations(std::vector<int>& nums, int k) {
+    std::sort(nums.begin(), nums.end());
+
+    int i = 0;
+    while (k > 0 && i < nums.size() && nums[i] < 0) {
+        nums[i] *= -1;
+        k--;
+        i++;
+    }
+
+    std::sort(nums.begin(), nums.end());
+
+    if (k % 2 == 1) {
+        nums[0] *= -1;
+    }
+
+    int sum = 0;
+    for (int num : nums) {
+        sum += num;
+    }
+
+    return sum;
+}
+};
+
+Negating only the first k elements: In the initial code, you are negating only the first k elements of the sorted nums array. However, the goal is to perform exactly k negations, which means you can choose any index i multiple times. This approach may not cover all possible cases correctly.
+
+Missing handling for positive numbers: After performing the negations, the code sorts the array again and checks if k is odd or even to decide whether to negate the smallest element again. However, this approach doesn't consider the case when there are positive numbers remaining after negating all negative numbers. Negating a positive number will decrease the overall sum.
+
+To fix these mistakes, the modified code handles negations until k becomes zero or all negative numbers have been negated. It then checks if k is odd and negates the smallest element accordingly. Finally, it calculates the sum of all elements in the modified array and returns it as the result.
+
+These modifications ensure that all negations are applied correctly and provide the largest possible sum after the negations.
