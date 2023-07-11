@@ -1,6 +1,6 @@
 # Leet_Code
 
-This repository contains my solutions to LeetCode problems. The solutions are implemented in various programming languages.
+My EASY, CLEAN and UNDERSTANDABLE Solutions for LeetCode problems
 
 ## Installation
 
