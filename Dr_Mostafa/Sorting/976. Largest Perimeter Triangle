@@ -1,0 +1,17 @@
+class Solution {
+public:
+   int largestPerimeter(vector<int>& nums) {
+  sort(nums.rbegin(),nums.rend());
+    for (int i = 0; i < nums.size()-2; ++i) {
+        if (nums[i]<nums[i+1]+nums[i+2])return nums[i]+nums[i+1]+nums[i+2];
+    }
+    return 0;
+}
+};
+
+
+
+ 1-بص يا معلم هو عاوزك ترجع اكبر مجموع لاطوال اضلاع المثلث هي دي الفكره كلها 
+how to solve this problem:
+we need to sort the array in decreasing order
+second, make a loop and condition to check if the biggest element is less than the sum of the other elements if it returns the sum of the theme if not return zero 
