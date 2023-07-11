@@ -1,0 +1,75 @@
+class Solution {
+public:
+    int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
+vector<double>time;
+    for (int i = 0; i < speed.size(); ++i) {
+        time.push_back((double)dist[i]/(double)speed[i]);
+    }
+    std::sort(time.begin(), time.end());
+    int t=0,res=0;
+    for (auto a:time) {
+        if (a<=t){
+            break;
+        } else
+        {
+            t++;
+            res++;
+        }
+    }
+    return res;
+}
+
+};
+
+Method 1 :
+
+As we have to Eliminate a Maximum Number of Monsters, means if we first kill monsters has 
+higher speed, then we can kill more later by eliminating lower speed monsters.
+
+Input: dist = [3,2,4], speed = [5,3,2]
+
+1. Kill the first monster with the maximum speed 5;
+       dist = [X,2,4], speed = [X,3,2]
+
+1i.After 1 minute(the weapon's recharge time):
+       dist = [X,0,2], speed = [X,3,2]
+
+( dist[1] - speed[1] = 2-3 = -1 means it reached the city + killed people also.
+So just put 0 )
+
+As we've encountered 0 means we lost, so return 1 as we were able to kill 1.
+THIS WAY IS HASSLE AS WE HAVE TO UPDATE dist EACH TIME. So we need something
+which will work as a medium for both dist and speed[method 2].
+Method 2 : Time
+
+We are given distance(dist) and speed where speed[i] for each monster is constant.
+              If speed is constant then we know
+              v = st, where v = speed, s = distance & t = time
+           or t = v/s
+
+'THE GAME STARTS AT MINUTE 0'. First we kill, then we wait for 'A MINUTE'. SO
+
+0 Minute : Kill one
+1 Minute : Kill second
+2 Minute : Kill third [ obviously applying conditions ]
+......................
+
+If we can know at which minute each monster is arriving at the city, 
+we will be able to know if we can kill any monster at minute 0/1/2..
+
+So to store time for each monster, we create another list/vector 'time'
+
+Calculation : time[i] = ceil(dist[i]/speed[i]) as we saw t = s/v
+              Same as = (dist[i]+speed[i]-1) / speed[i]
+
+The reason we are doing ceil cause we will be working at minute '0'/'1'/..(INTEGER VALUE)
+You can also create A list/vector of float numbers.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+We have a list of monsters represented by their distances (dist) and speeds (speed).
+We want to eliminate the maximum number of monsters possible.
+To determine the order in which monsters can be killed, we calculate their arrival times using the formula: time[i] = ceil(dist[i] / speed[i]). This represents the time it takes for each monster to reach the city.
+We sort the time list in non-decreasing order.
+Starting from minute 0, we simulate the passage of time and count the number of eliminated monsters.
+For each minute, we check if any monsters have arrived. If a monster's arrival time is less than or equal to the current minute, it can be eliminated.
+We continue incrementing the minute and counting eliminated monsters until no more monsters can be eliminated.
+Finally, we return the count of eliminated monsters as the maximum number that can be eliminated.
