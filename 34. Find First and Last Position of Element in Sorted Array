@@ -1,4 +1,3 @@
-34. Find First and Last Position of Element in Sorted Array
 class Solution {
 public:
     int lowerBound(const std::vector<int>& nums, int target) {
