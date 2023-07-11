@@ -1,0 +1,30 @@
+class Solution {
+public:
+int reductionOperations(vector<int>& nums) {
+    int n=nums.size();
+    int ct=0;
+    sort(nums.begin(),nums.end());
+    for (int i = n-1; i >0 ; --i)
+        if (nums[i-1]!=nums[i])
+            ct+=n-i;
+    return ct;
+}
+
+
+};
+
+
+Initialize a count variable res to 0.
+Sort the array in ascending order.
+Iterate through the array in reverse order.
+Compare each element with the previous element.
+If they are not equal, add the count of remaining elements from the current position to the end of the array to res.
+Return the final count res representing the minimum number of operations needed.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Nested Loops: Approach 1 uses two nested loops to compare each element with all subsequent elements. This leads to a time complexity of O(n^2), which is less efficient. In general, be cautious when using nested loops, especially when unnecessary comparisons or operations are involved.
+
+Array Manipulation: Approach 1 modifies the original array by replacing elements. Modifying the input array can lead to unexpected side effects and make the code harder to understand and debug. It's often preferable to avoid modifying the input array unless necessary.
+
+Early Return: Approach 1 includes an early return statement if all elements in the array are already equal. While this is a good optimization, it is important to ensure that the early return condition is correct. In this case, checking if the first element is equal to the last element is not sufficient to determine if all elements are equal. It is necessary to compare each element to the previous element to ensure equality.
+
+Duplicate Operations: Approach 1 does not efficiently handle duplicate operations. Since it compares each element with all subsequent elements, it can perform redundant operations on duplicate elements. To improve efficiency, it is important to eliminate redundant operations and unnecessary comparisons.
