@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+int n=nums.size();
+int maxVal=nums[0],mnVal=nums[0];
+    for (int i = 1; i <n; i++) {
+        if (nums[i]>maxVal)
+            maxVal=nums[i];
+        if (nums[i]<mnVal)mnVal=nums[i];
+    }
+    int new_max=maxVal-mnVal;
+    vector<int>count(new_max+1);
+    for (int i = 0; i < n; i++) {
+        count[nums[i]-mnVal]+=1;
+    }
+    int index=0;
+    for (int i = 0; i <= new_max; i++) {
+        for (int j = 0; j < count[i]; ++j,++index) {
+            nums[index]=i+mnVal;
+        }
+    }
+    return nums;
+}
+
+
+};
