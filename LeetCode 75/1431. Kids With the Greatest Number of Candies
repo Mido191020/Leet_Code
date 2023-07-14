@@ -12,20 +12,14 @@ auto x= max_element(candies.begin(),candies.end());
     return v;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-The function kidsWithCandies takes two parameters: a reference to a vector of integers named candies, and an integer named extraCandies.
+We define a function kidsWithCandies that takes a reference to a vector of integers candies and an integer extraCandies. It returns a vector of booleans indicating whether each kid can have the maximum number of candies.
 
-We declare a new vector called v, which will store the results indicating whether each kid can have the maximum number of candies.
+The function uses the std::max_element function from the <algorithm> library to find the maximum element in the candies vector.
 
-We use the max_element function from the <algorithm> library to find the maximum element in the candies vector. The result is stored in the variable x.
+We iterate through each element of the candies vector, checking if the sum of the current element and extraCandies is greater than or equal to the maximum element.
 
-We iterate over each element of the candies vector using a for loop and the index variable i.
+Based on the result, we push true or false into the result vector.
 
-Inside the loop, we check if the sum of extraCandies and candies[i] is greater than or equal to the maximum element (*x).
-
-If the condition is true, we use v.push_back(true) to add true to the v vector. This indicates that the kid at index i can have the maximum number of candies.
-
-If the condition is false, we use v.push_back(false) to add false to the v vector. This indicates that the kid at index i cannot have the maximum number of candies.
-
-After iterating through all the elements of the candies vector, we have populated the v vector with the results indicating whether each kid can have the maximum number of candies.
+Finally, we return the result vector.
 
 Finally, we return the v vector as the result of the function.
