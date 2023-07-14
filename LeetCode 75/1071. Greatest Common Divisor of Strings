@@ -1,0 +1,46 @@
+ The problem asks us to find the longest possible gcd string that satisfies the conditions mentioned above.
+If no such gcd string exists, the solution should return an empty string.
+We are given two strings, str1 and str2. The goal is to find the longest string gcd that satisfies the following conditions:
+gcd is a divisor of both str1 and str2.
+There is no other string longer than gcd that also satisfies condition 1.
+To clarify further, a string gcd is considered 
+a divisor of another string if it can be repeated multiple times to form that string. For example, "abc" 
+is a divisor of "abcabcabc" because it can be repeated three times.
+
+std::string gcdOfStrings(std::string str1, std::string str2) {
+return (str1 + str2 == str2 + str1)? 
+        str1.substr(0, gcd(size(str1),size(str2))): "";
+}
+///////////////////////////////////////////////////////////////////////////
+std::string gcdOfStrings(std::string str1, std::string str2) {
+    std::string gcd;
+
+    for (int i = 1; i <= str1.length(); i++) {
+        std::string prefix = str1.substr(0, i);
+
+        if (isDivisor(prefix, str1) && isDivisor(prefix, str2)) {
+            gcd = prefix;
+        }
+    }
+
+    return gcd;
+}
+
+bool isDivisor(const std::string& divisor, const std::string& str) {
+    if (divisor.length() == 0 || str.length() % divisor.length() != 0) {
+        return false;
+    }
+
+    for (int i = 0; i < str.length(); i += divisor.length()) {
+        if (str.substr(i, divisor.length()) != divisor) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+
+
+
