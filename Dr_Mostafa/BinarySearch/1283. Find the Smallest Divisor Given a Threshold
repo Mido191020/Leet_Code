@@ -1,0 +1,33 @@
+class Solution {
+public:
+  int smallestDivisor(vector<int>& nums, int threshold) {
+    int l = 1, r = 1e6; // Considering the range of the divisor to be from 1 to 1 million.
+    int result = -1;
+
+    while (l <= r) {
+        int m = l + (r - l) / 2;
+        int s = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            s += (nums[i] + m - 1) / m; // Instead of ceil function, use (nums[i] + m - 1) / m to round up.
+        }
+
+        if (s <= threshold) {
+            result = m; // Update the result with the divisor, not the sum.
+            r = m - 1; // Continue searching for a smaller divisor.
+        } else {
+            l = m + 1;
+        }
+    }
+
+    return result;
+}
+
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Binary Search Approach: To efficiently find the smallest divisor, the corrected solution uses a binary search approach. It searches for the divisor within the range of 1 to 1 million (10^6).
+
+Proper Sum Calculation: The corrected solution calculates the sum of divisions correctly. It uses the expression (nums[i] + m - 1) / m to round up division results and ensures that it accurately represents the sum of divisions.
+
+Correct Result Return: The fixed solution returns the divisor (m) that satisfies the condition instead of the sum (s), which was the correct requirement of the problem.
+
+Consideration of Divisor Range: The solution considers a suitable range of divisors from 1 to 1 million, ensuring that the search space covers all possible divisors.
