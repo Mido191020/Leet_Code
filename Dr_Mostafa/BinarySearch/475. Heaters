@@ -1,0 +1,26 @@
+ int findRadius(vector<int>& houses, vector<int>& heaters) {
+    sort(houses.begin(), houses.end());
+    sort(heaters.begin(), heaters.end());
+    
+    int minRadius = 0;
+    for (int house : houses) {
+        int leftHeater = -1;
+        int rightHeater = heaters.size();
+        
+        while (rightHeater - leftHeater > 1) {
+            int midHeater = leftHeater + (rightHeater - leftHeater) / 2;
+            if (heaters[midHeater] < house) {
+                leftHeater = midHeater;
+            } else {
+                rightHeater = midHeater;
+            }
+        }
+        
+        int distanceToLeftHeater = (leftHeater >= 0) ? house - heaters[leftHeater] : INT_MAX;
+        int distanceToRightHeater = (rightHeater < heaters.size()) ? heaters[rightHeater] - house : INT_MAX;
+        
+        minRadius = max(minRadius, min(distanceToLeftHeater, distanceToRightHeater));
+    }
+    
+    return minRadius;
+}
