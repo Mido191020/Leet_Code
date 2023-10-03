@@ -12,28 +12,21 @@ class Solution {
 public:
       ListNode* swapPairs(ListNode* head) {
         if (!head || !head->next) {
-            return head; // If the list has 0 or 1 node, no swapping is needed
+            return head; 
         }
-        
-        ListNode* newHead = head->next; // New head after swapping
-        ListNode* prev = nullptr;
-        
-        while (head && head->next) {
-            ListNode* first = head;
-            ListNode* second = head->next;
-            
-            // Swap nodes
-            first->next = second->next;
-            second->next = first;
-            
-            if (prev) {
-                prev->next = second;
-            }
-            
-            prev = first;
-            head = first->next; // Move to the next pair
+        ListNode*temp=head->next;
+        ListNode*prev=NULL;
+        while(head&& head->next){
+            ListNode*first=head;
+            ListNode*second=head->next;
+                first->next=second->next;
+                second->next=first;
+                if(prev)
+                prev->next=second;
+                prev=first;
+                head=first->next;
         }
-        
-        return newHead;
+        return temp;
+       
     }
 };
