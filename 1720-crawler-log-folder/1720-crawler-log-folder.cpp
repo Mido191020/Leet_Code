@@ -1,14 +1,19 @@
 class Solution {
 public:
-         int minOperations(vector<string>& logs) {
-        int ct=0;
-        int size=logs.size();
-        for (const auto& str : logs) {
-             if (str == "../")ct = std::max(0, ct - 1);
-             else if(str!="./")ct++;
+        int minOperations(std::vector<std::string>& logs) {
+        int depth = 0; // Represents the depth of the current folder
+        
+        for (const auto& log : logs) {
+            if (log == "../") {
+                if (depth > 0) {
+                    depth--;
+                }
+            } else if (log != "./") {
+                depth++;
+            }
         }
-       
-      
-        return ct;
+        
+        return depth;
     }
+    
 };
